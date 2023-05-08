@@ -1,0 +1,3 @@
+nicegui
+spotdl
+spotipy

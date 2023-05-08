@@ -1,0 +1,70 @@
+{
+    'album': {
+        'album_group': 'single',
+        'album_type': 'single',
+        'artists': [{
+            'external_urls': {
+                'spotify': 'https://open.spotify.com/artist/2Rum2rwDio2My0Md24m3Oa'
+            },
+            'href': 'https://api.spotify.com/v1/artists/2Rum2rwDio2My0Md24m3Oa',
+            'id': '2Rum2rwDio2My0Md24m3Oa',
+            'name': 'Fly Project',
+            'type': 'artist',
+            'uri': 'spotify:artist:2Rum2rwDio2My0Md24m3Oa'
+        }],
+        'available_markets': ['AD', 'AE', 'AG', 'AL', 'AO', 'AR', 'AT', 'AU', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BN', 'BO', 'BR', 'BS', 'BT', 'BW', 'BZ', 'CA', 'CD', 'CG', 'CH', 'CI', 'CL', 'CM', 'CO', 'CR', 'CV', 'CW', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'ET', 'FI', 'FJ', 'FM', 'FR', 'GA', 'GB', 'GD', 'GH', 'GM', 'GN', 'GQ', 'GR', 'GT', 'GW', 'GY', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IQ', 'IS', 'IT', 'JM', 'JO', 'JP', 'KE', 'KH', 'KI', 'KM', 'KN', 'KR', 'KW', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MG', 'MH', 'MK', 'ML', 'MN', 'MR', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NE', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NZ', 'OM', 'PA', 'PE', 'PG', 'PH', 'PK', 'PL', 'PS', 'PT', 'PW', 'PY', 'QA', 'RO', 'RS', 'RW', 'SA', 'SB', 'SC', 'SE', 'SG', 'SI', 'SK', 'SL', 'SM', 'SN', 'SR', 'ST', 'SV', 'SZ', 'TD', 'TG', 'TH', 'TL', 'TN', 'TO', 'TR', 'TT', 'TV', 'TZ', 'UA', 'UG', 'US', 'UY', 'VC', 'VE', 'VN', 'VU', 'WS', 'XK', 'ZA', 'ZM', 'ZW'],
+        'external_urls': {
+            'spotify': 'https://open.spotify.com/album/7vCFA4aWu4HJQeGcbuOwpl'
+        },
+        'href': 'https://api.spotify.com/v1/albums/7vCFA4aWu4HJQeGcbuOwpl',
+        'id': '7vCFA4aWu4HJQeGcbuOwpl',
+        'images': [{
+            'height': 640,
+            'url': 'https://i.scdn.co/image/ab67616d0000b273236c4747dc85958f406ce7af',
+            'width': 640
+        }, {
+            'height': 300,
+            'url': 'https://i.scdn.co/image/ab67616d00001e02236c4747dc85958f406ce7af',
+            'width': 300
+        }, {
+            'height': 64,
+            'url': 'https://i.scdn.co/image/ab67616d00004851236c4747dc85958f406ce7af',
+            'width': 64
+        }],
+        'name': 'Toca-Toca',
+        'release_date': '2013-11-19',
+        'release_date_precision': 'day',
+        'total_tracks': 2,
+        'type': 'album',
+        'uri': 'spotify:album:7vCFA4aWu4HJQeGcbuOwpl'
+    },
+    'artists': [{
+        'external_urls': {
+            'spotify': 'https://open.spotify.com/artist/2Rum2rwDio2My0Md24m3Oa'
+        },
+        'href': 'https://api.spotify.com/v1/artists/2Rum2rwDio2My0Md24m3Oa',
+        'id': '2Rum2rwDio2My0Md24m3Oa',
+        'name': 'Fly Project',
+        'type': 'artist',
+        'uri': 'spotify:artist:2Rum2rwDio2My0Md24m3Oa'
+    }],
+    'available_markets': ['AR', 'AU', 'AT', 'BE', 'BO', 'BR', 'BG', 'CA', 'CL', 'CO', 'CR', 'CY', 'CZ', 'DK', 'DO', 'DE', 'EC', 'EE', 'SV', 'FI', 'FR', 'GR', 'GT', 'HN', 'HU', 'IS', 'IE', 'IT', 'LV', 'LT', 'LU', 'MY', 'MT', 'MX', 'NL', 'NZ', 'NI', 'NO', 'PA', 'PY', 'PE', 'PH', 'PL', 'PT', 'SG', 'SK', 'SE', 'CH', 'TR', 'UY', 'US', 'GB', 'AD', 'LI', 'MC', 'ID', 'JP', 'TH', 'VN', 'RO', 'IL', 'ZA', 'SA', 'AE', 'BH', 'QA', 'OM', 'KW', 'EG', 'MA', 'DZ', 'TN', 'LB', 'JO', 'PS', 'MD', 'UA', 'AL', 'BA', 'HR', 'ME', 'MK', 'RS', 'SI', 'KR', 'BD', 'PK', 'LK', 'GH', 'KE', 'NG', 'TZ', 'UG', 'AG', 'BS', 'BB', 'BZ', 'BT', 'BW', 'BF', 'CV', 'CW', 'DM', 'FJ', 'GM', 'GD', 'GW', 'GY', 'HT', 'JM', 'KI', 'LS', 'LR', 'MW', 'MV', 'ML', 'MH', 'FM', 'NA', 'NR', 'NE', 'PW', 'PG', 'WS', 'SM', 'ST', 'SN', 'SC', 'SL', 'SB', 'KN', 'LC', 'VC', 'SR', 'TL', 'TO', 'TT', 'TV', 'VU', 'BN', 'BI', 'KH', 'CM', 'TD', 'KM', 'GQ', 'SZ', 'GA', 'GN', 'LA', 'MR', 'MN', 'NP', 'RW', 'TG', 'ZW', 'BJ', 'MG', 'MU', 'MZ', 'AO', 'CI', 'DJ', 'ZM', 'CD', 'CG', 'IQ', 'LY', 'VE', 'ET', 'XK'],
+    'disc_number': 1,
+    'duration_ms': 165355,
+    'explicit': False,
+    'external_ids': {
+        'isrc': 'ROR0T1313101'
+    },
+    'external_urls': {
+        'spotify': 'https://open.spotify.com/track/2fDByLUAC1YsxbhgHGBqdg'
+    },
+    'href': 'https://api.spotify.com/v1/tracks/2fDByLUAC1YsxbhgHGBqdg',
+    'id': '2fDByLUAC1YsxbhgHGBqdg',
+    'is_local': False,
+    'name': 'Toca Toca',
+    'popularity': 61,
+    'preview_url': 'https://p.scdn.co/mp3-preview/e56850567615529faa0c8d7e78952350b035af9a?cid=66e8ace49da04c10aea8072569dcc9f7',
+    'track_number': 1,
+    'type': 'track',
+    'uri': 'spotify:track:2fDByLUAC1YsxbhgHGBqdg'
+}
