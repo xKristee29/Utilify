@@ -1,12 +1,15 @@
 from nicegui import ui
 from spotify_dl import spotify_download
 from scraper import search_tracks
+import threading
 
 tracks = ['2PMxsrSS8vEy9AXeluXxNs','3SB1JqZVZ8vpDxSZzddiEO','7cih8FnEEwMlz9usWRaqwt','2NkCMAUYhqN8recETFVU2m','6VNjk0H51mnGgluivFZhQ2','5dBvUkplYBBBb3sJ2VORQy','4MnRwi9CzuRf947lKlxsVc']
 
 track_elems = {}
 
 result_container = None
+
+dl_threads = []
 
 def results():
     global track_elems
@@ -27,8 +30,11 @@ def add_track(track):
                 ui.button('',on_click=lambda:dislike(track_row)).props('flat color=primary icon=thumb_down')
 
 def download_row(track_row):
+    global dl_threads
     track=track_elems[track_row]
-    spotify_download(track)
+    dl_thread = threading.Thread(target=spotify_download, args=(track,))
+    dl_thread.start()
+    dl_threads.append(dl_thread)
 
 def like(track_row):
     ui.notify('Liked! Track ID: '+track_elems[track_row])
