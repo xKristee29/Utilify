@@ -1,11 +1,12 @@
 import random
 from nicegui import ui
-from spotify_dl import spotify_download
+import spotify_dl as sd
 from scraper import recommend_tracks
+import querydb as db
 
-genres = ['romanian-pop','romanian-rap','manele','romanian-trap']
+genres = ['romanian-pop','romanian-rap','house','romanian-trap', 'pop', 'rap', 'trap', 'edm', 'dance', 'latin']
 
-tracks = ['2PMxsrSS8vEy9AXeluXxNs','3SB1JqZVZ8vpDxSZzddiEO','7cih8FnEEwMlz9usWRaqwt','2NkCMAUYhqN8recETFVU2m','6VNjk0H51mnGgluivFZhQ2','5dBvUkplYBBBb3sJ2VORQy','4MnRwi9CzuRf947lKlxsVc']
+tracks = []
 
 track_elems = {}
 
@@ -31,11 +32,12 @@ def add_track(track):
 
 def download_row(track_row):
     track=track_elems[track_row]
-    spotify_download(track)
+    sd.spotify_download(track)
 
 def like(track_row):
     global result_container
     track=track_elems[track_row]
+    db.insert_track(track,1.0)
     ui.notify('Liked! Track ID: '+track)
     tracks.remove(track)
     result_container.remove(track_row)
@@ -44,6 +46,7 @@ def like(track_row):
 def dislike(track_row):
     global result_container
     track=track_elems[track_row]
+    db.insert_track(track,0.0)
     ui.notify('Disliked! Track ID: '+track)
     tracks.remove(track)
     result_container.remove(track_row)
@@ -56,37 +59,37 @@ def initRecommendPage():
             with ui.row().classes('items-center justify-center'):
                 ui.label('Cuvinte cheie:')
                 global keywords
-                keywords = ui.input(label='')
+                keywords = ui.input(label='').classes("text-xl")
 
             with ui.row().classes('items-center'):
                 ui.label('Gen:')
                 global genre
-                genre = ui.select(genres, value=genres[0])
+                genre = ui.select(genres, value=genres[0]).classes("text-xl")
             
-            with ui.row().classes('items-center'):
+            with ui.row().classes('items-center justify-center'):
                 ui.label('Tempo (BPM) 0-200:')
                 global tempo_min
                 global tempo_max
-                tempo_min = ui.number(label='Min', value=60, format='%i')
-                tempo_max = ui.number(label='Max', value=140, format='%i')
+                tempo_min = ui.number(label='Min', value=60, format='%i').classes("text-xl w-1/6")
+                tempo_max = ui.number(label='Max', value=140, format='%i').classes("text-xl w-1/6")
             
-            with ui.row().classes('items-center'):
+            with ui.row().classes('items-center justify-center'):
                 ui.label('Nivel energie 0-100:')
                 global energy_level
-                energy_level = ui.number(value=60, format='%i')
+                energy_level = ui.number(value=60, format='%i').classes("text-xl w-1/6")
             
-            with ui.row().classes('items-center'):
+            with ui.row().classes('items-center justify-center'):
                 ui.label('Dansabilitatea 0-100:')
                 global danceability
-                danceability = ui.number(value=70, format='%i')
+                danceability = ui.number(value=70, format='%i').classes("text-xl w-1/6")
             
-            with ui.row().classes('items-center'):
+            with ui.row().classes('items-center justify-center'):
                 ui.label('Popularitate:')
                 global popularity
-                popularity = ui.number(value=40, format='%i')
+                popularity = ui.number(value=40, format='%i').classes("text-xl w-1/6")
         
             with ui.row().classes('justify-center p-4 space-y-2'):
-                search = ui.button('Caută', on_click=on_search)
+                search = ui.button('Caută', on_click=on_search).classes("text-xl")
             
 
 def on_search():

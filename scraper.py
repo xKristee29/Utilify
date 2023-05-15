@@ -43,3 +43,18 @@ def recommend_tracks(genre, tempo_range, energy_level, danceability, popularity,
     
     # Return the track name, artist name, and Spotify URI
     return [track['id'] for track in filtered_tracks]
+
+def get_track_info(track_id):
+    # Retrieve track information
+    track = spotify.track(track_id)
+    artist = track['artists'][0]['name']
+    name = track['name']
+
+    # Retrieve audio features
+    audio_features = spotify.audio_features(track_id)[0]
+    tempo = audio_features['tempo']
+    energy = audio_features['energy']
+    danceability = audio_features['danceability']
+    popularity = track['popularity']
+
+    return artist, name, tempo, energy, danceability, popularity

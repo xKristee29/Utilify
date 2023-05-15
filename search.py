@@ -1,15 +1,13 @@
 from nicegui import ui
-from spotify_dl import spotify_download
+import spotify_dl as sd
 from scraper import search_tracks
-import threading
+import querydb as db
 
 tracks = ['2PMxsrSS8vEy9AXeluXxNs','3SB1JqZVZ8vpDxSZzddiEO','7cih8FnEEwMlz9usWRaqwt','2NkCMAUYhqN8recETFVU2m','6VNjk0H51mnGgluivFZhQ2','5dBvUkplYBBBb3sJ2VORQy','4MnRwi9CzuRf947lKlxsVc']
 
 track_elems = {}
 
 result_container = None
-
-dl_threads = []
 
 def results():
     global track_elems
@@ -30,25 +28,26 @@ def add_track(track):
                 ui.button('',on_click=lambda:dislike(track_row)).props('flat color=primary icon=thumb_down')
 
 def download_row(track_row):
-    global dl_threads
     track=track_elems[track_row]
-    dl_thread = threading.Thread(target=spotify_download, args=(track,))
-    dl_thread.start()
-    dl_threads.append(dl_thread)
+    sd.spotify_download(track)
 
 def like(track_row):
+    track_id=track_elems[track_row]
+    db.insert_track(track_id,1.0)
     ui.notify('Liked! Track ID: '+track_elems[track_row])
 
 def dislike(track_row):
+    track_id=track_elems[track_row]
+    db.insert_track(track_id,0.0)
     ui.notify('Disliked! Track ID: '+track_elems[track_row])
 
 def initSearchPage():
     global container
     with ui.element('div').classes('flex justify-around space-x-1 text-xl min-h-screen min-w-full'):
         with ui.column().classes('items-center p-4 space-y-3 m-0 min-w-full') as container:
-            with ui.row().classes('items-center justify-center min-w-full'):
+            with ui.card().classes('flex flex-row items-center justify-center w-full from-gray-800 to-gray-600 bg-gradient-to-r'):
                 global query
-                query = ui.input(label='Caută').on('keydown.enter', on_search).style('width: 40%;')
+                query = ui.input(label='Caută').on('keydown.enter', on_search).style('width: 80%;')
                 ui.button('', on_click=on_search).props('flat color=primary icon=search')
 
 def on_search():
