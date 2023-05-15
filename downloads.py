@@ -52,19 +52,11 @@ def initDownladPage():
     global container
     with ui.element('div').classes('flex justify-around space-x-1 text-xl min-h-screen min-w-full'):
         with ui.column().classes('items-center p-4 space-y-3 m-0 w-full') as container:
-            with ui.card().classes('flex flex-row items-center justify-center w-full from-gray-800 to-gray-600 bg-gradient-to-r'):
-                global query
-                query = ui.input(label='Caută').on(
-                    'keydown.enter', on_search).style('width: 80%;')
-                ui.button('', on_click=on_search).props(
-                    'flat color=primary icon=search')
             on_search()
-
 
 def refresh_search():
     time.sleep(5)
     on_search()
-
 
 def on_search():
     global result_container
