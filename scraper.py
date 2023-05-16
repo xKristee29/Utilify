@@ -1,12 +1,9 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-import csv
 from dotenv import load_dotenv
 import os
 import tensorflow as tf
 import numpy as np
-import pandas as pd
-from sklearn.preprocessing import StandardScaler
 
 load_dotenv()
 

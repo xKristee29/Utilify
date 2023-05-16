@@ -2,7 +2,6 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from dotenv import load_dotenv
 import os
-import random
 
 load_dotenv()
 

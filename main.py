@@ -2,8 +2,6 @@ from nicegui import ui
 import recommend
 import search
 import downloads
-import os
-import sys
 
 with ui.header(elevated=True).classes('fixed top-0 left-0 right-0 z-0 p-0 justify-center'):
     with ui.tabs() as tabs:
