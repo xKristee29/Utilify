@@ -8,7 +8,7 @@ with ui.header(elevated=True).classes('fixed top-0 left-0 right-0 z-0 p-0 justif
         ui.tab('Recomandare', icon='star')
         ui.tab('Căutare', icon='search')
         ui.tab('Descărcare', icon='download')
-        ui.tab('Istoric', icon='book')
+        ui.tab('Playlist', icon='book')
         ui.tab('Despre', icon='info')
 
 with ui.element('div').classes('m-0 top-0 left-0 right-0 z-0 justify-center min-h-screen').style('width: 100%;'):
@@ -19,7 +19,7 @@ with ui.element('div').classes('m-0 top-0 left-0 right-0 z-0 justify-center min-
             search.initSearchPage()
         with ui.tab_panel('Descărcare'):
             downloads.initDownladPage()
-        with ui.tab_panel('Istoric'):
+        with ui.tab_panel('Playlist'):
             ui.label('Work in progress')
             ui.spinner(size='lg')
         with ui.tab_panel('Despre'):

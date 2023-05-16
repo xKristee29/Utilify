@@ -88,7 +88,7 @@ def initRecommendPage():
                 global popularity
                 popularity = ui.number(value=40, format='%i').classes("text-xl w-1/6")
         
-            with ui.row().classes('flex-row justify-center items-center p-4 space-y-2'):
+            with ui.row().classes('flex-row justify-center items-center p-4 space-x-4'):
                 search = ui.button('Caută', on_click=on_search).classes("text-xl")
                 search_ai = ui.button('Caută cu AI', on_click=on_search_ai).classes("text-xl")
             
