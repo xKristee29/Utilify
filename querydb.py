@@ -1,21 +1,15 @@
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 import scraper
 
-cred = credentials.Certificate("./utilify-acd8b.json")
-app = firebase_admin.initialize_app(cred)
-firestore_client = firestore.client()
+scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
+		"https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
+
+creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
+client = gspread.authorize(creds)
+sheet = client.open("UtilifyDB").sheet1
 
 def insert_track(track_id,rating):
-    artist, name, tempo, energy, danceability, popularity = scraper.get_track_info(track_id)
-    doc_ref = firestore_client.collection('tracks')
-    doc_ref.add({
-        'artist': artist,
-        'name': name,
-        'tempo': tempo,
-        'energy': energy,
-        'danceability': danceability,
-        'popularity': popularity,
-        'rating': rating
-    })
+    artist, track_name, tempo, energy, danceability, popularity = scraper.get_track_info(track_id)
+    row = [track_id, artist, track_name, tempo, energy, danceability, popularity, rating]
+    sheet.insert_row(row,2)

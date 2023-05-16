@@ -3,6 +3,10 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import csv
 from dotenv import load_dotenv
 import os
+import tensorflow as tf
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
 
 load_dotenv()
 
@@ -13,6 +17,8 @@ client_secret = os.getenv('SPOTIFY_CLIENT_SECRET')
 # Create a Spotify client with credentials
 client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
 spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+
+model = tf.keras.models.load_model('utilify-ai.h5')
 
 def search_tracks(query):
     # Search for tracks based on the query
@@ -44,17 +50,35 @@ def recommend_tracks(genre, tempo_range, energy_level, danceability, popularity,
     # Return the track name, artist name, and Spotify URI
     return [track['id'] for track in filtered_tracks]
 
+def recommend_tracks_ai(genre, keywords):
+     # Search for tracks that match the specified genre
+    query = f"{keywords} genre:{genre}"
+    tracks = spotify.search(q=query, type='track', limit=50)['tracks']['items']
+
+    # Retrieve audio features for each track
+    track_ids = [track['id'] for track in tracks]
+    tracks = []
+    for track_id in track_ids:
+        _, _, tempo, energy, danceability, popularity = get_track_info(track_id)
+        track = np.array((tempo, energy, danceability, popularity))
+        track = np.reshape(track,(1,4))
+        pred = model.predict(track)
+        if pred[0][0] > 0.5:
+            tracks.append(track_id)
+    
+    return tracks
+
 def get_track_info(track_id):
     # Retrieve track information
     track = spotify.track(track_id)
     artist = track['artists'][0]['name']
-    name = track['name']
+    track_name = track['name']
 
     # Retrieve audio features
     audio_features = spotify.audio_features(track_id)[0]
-    tempo = audio_features['tempo']
-    energy = audio_features['energy']
-    danceability = audio_features['danceability']
+    tempo = int(audio_features['tempo'])
+    energy = int(audio_features['energy']*100)
+    danceability = int(audio_features['danceability']*100)
     popularity = track['popularity']
 
-    return artist, name, tempo, energy, danceability, popularity
+    return artist, track_name, tempo, energy, danceability, popularity

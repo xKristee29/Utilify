@@ -22,9 +22,11 @@ with ui.element('div').classes('m-0 top-0 left-0 right-0 z-0 justify-center min-
         with ui.tab_panel('Descărcare'):
             downloads.initDownladPage()
         with ui.tab_panel('Istoric'):
-            ui.label('This is the first tab This is the first tab This is the first tab This is the first tab')
+            ui.label('Work in progress')
+            ui.spinner(size='lg')
         with ui.tab_panel('Despre'):
-            ui.label('This is the second tab This is the first tab This is the first tab This is the first tab')
+            ui.label('Work in progress')
+            ui.spinner(size='lg')
 
 ui.run(port=8000, title='Utilify', favicon='favicon.ico', dark=True, window_size=(680, 1000),
         viewport='width=device-width, initial-scale=1.0')

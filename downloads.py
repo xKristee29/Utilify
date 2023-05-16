@@ -64,7 +64,7 @@ def on_search():
     global thread
     if result_container == None:
         with container:
-            result_container = ui.column().classes('p-2 space-y-2 mt-10')
+            result_container = ui.column().classes('p-2 space-y-2 m-4')
     list_of_files = filter(lambda x: os.path.isfile(os.path.join(download_path, x)),
                            os.listdir(download_path))
     list_of_files = sorted(list_of_files,
@@ -81,6 +81,5 @@ def on_search():
     tracks = pending + downed
     result_container.clear()
     results()
-    if len(pending)>0:
-        thread = Thread(target=refresh_search)
-        thread.start()
+    thread = Thread(target=refresh_search)
+    thread.start()

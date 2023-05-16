@@ -1,10 +1,10 @@
 import random
 from nicegui import ui
 import spotify_dl as sd
-from scraper import recommend_tracks
+import scraper as sc
 import querydb as db
 
-genres = ['romanian-pop','romanian-rap','house','romanian-trap', 'pop', 'rap', 'trap', 'edm', 'dance', 'latin']
+genres = ['romanian-pop', 'romanian-rap', 'romanian-trap', 'manele', 'house', 'pop', 'rap', 'trap', 'edm', 'dance', 'latin']
 
 tracks = []
 
@@ -56,7 +56,7 @@ def initRecommendPage():
     global container
     with ui.element('div').classes('flex justify-around space-x-1 text-xl min-h-screen') as container:
         with ui.column().classes('items-center p-4 space-y-3 m-0'):
-            with ui.row().classes('items-center justify-center'):
+            with ui.row().classes('flex-around items-center justify-center'):
                 ui.label('Cuvinte cheie:')
                 global keywords
                 keywords = ui.input(label='').classes("text-xl")
@@ -88,20 +88,33 @@ def initRecommendPage():
                 global popularity
                 popularity = ui.number(value=40, format='%i').classes("text-xl w-1/6")
         
-            with ui.row().classes('justify-center p-4 space-y-2'):
+            with ui.row().classes('flex-row justify-center items-center p-4 space-y-2'):
                 search = ui.button('Caută', on_click=on_search).classes("text-xl")
+                search_ai = ui.button('Caută cu AI', on_click=on_search_ai).classes("text-xl")
             
 
 def on_search():
     global result_container
     global tracks
-    tracks = recommend_tracks(genre.value, 
+    tracks = sc.recommend_tracks(genre.value, 
                                 [float(tempo_min.value), float(tempo_max.value)], 
                                 float(energy_level.value) / 100.0, 
                                 float(danceability.value) / 100.0, 
                                 int(popularity.value),
                                 keywords.value)
-    if len(tracks) > 20:
+    if tracks is not None and len(tracks) > 20:
+        tracks = random.sample(tracks,20)
+    if result_container == None:
+        with container:
+            result_container = ui.column().classes('p-2 space-y-2 mt-10')
+    result_container.clear()
+    results()
+
+def on_search_ai():
+    global result_container
+    global tracks
+    tracks = sc.recommend_tracks_ai(genre.value, keywords.value)
+    if tracks is not None and len(tracks) > 20:
         tracks = random.sample(tracks,20)
     if result_container == None:
         with container:
