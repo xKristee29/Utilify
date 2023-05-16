@@ -24,7 +24,7 @@ Ca utilizatori primari soft-ul este dedicat pentru:
 - Studiourile de radio și televiziune
 - Utilizatorii de zi cu zi
 
-***Opinia și utilitatea personală***
+***Opinia și utilitatea personală:***
 Ca DJ în timpul evenimentelor întâmpin mereu problema alesului următoarei melodii. Mă pierd mereu în aproape 500 de melodii din care am de ales una singură. Așa că m-am gândit cum pot să-mi ușurez munca într-un mod inteligent și am venit cu această soluție care, din testele pe care le-am făcut pe propria persoană, reușește să mă uimească.
 Prin utilizarea aplicației îmi acord mai mult timp mixării melodiilor, putând oferi o experiență îmbunătățită publicului meu.
 
