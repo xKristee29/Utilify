@@ -1,0 +1,4 @@
+fastapi[all]
+supabase
+spotipy
+scikit-learn

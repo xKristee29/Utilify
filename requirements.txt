@@ -6,3 +6,5 @@ pandas
 tensorflow
 gspread
 oauth2client
+fastapi[all]
+flet
