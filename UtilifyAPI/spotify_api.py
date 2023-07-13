@@ -2,6 +2,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from dotenv import load_dotenv
 import os
+import hashlib
 
 load_dotenv()
 
@@ -23,6 +24,7 @@ def get_playlist_tracks(playlist_id):
             track_item = track_data_beautify(track, audio_features)
             tracks.append(track_item)
     except Exception as e:
+        print(e)
         raise Exception('Playlist not found')
     return tracks
 
@@ -36,10 +38,12 @@ def get_track(track_id):
     return track_item
 
 def track_data_beautify(track, audio_features):
+    track_artists = [artist['name'] for artist in track['artists']]
+    track_hash = hashlib.md5(str(track['name'] + ' - ' + ", ".join(track_artists)).encode()).hexdigest()
     return {
             'track_id':track['id'],
             'track_name':track['name'],
-            'track_artists':[artist['name'] for artist in track['artists']],
+            'track_artists':track_artists,
             'release_date':track['album']['release_date'],
             'danceability': audio_features['danceability'],
             'energy': audio_features['energy'],
@@ -52,7 +56,8 @@ def track_data_beautify(track, audio_features):
             'instrumentalness': audio_features['instrumentalness'],
             'liveness': audio_features['liveness'],
             'valence': audio_features['valence'],
-            'tags': [audio_features['danceability'], audio_features['energy'], audio_features['tempo'], audio_features['key'], audio_features['loudness'], audio_features['mode'], audio_features['speechiness'], audio_features['acousticness'], audio_features['instrumentalness'], audio_features['liveness'], audio_features['valence']]
+            'tags': [audio_features['danceability'], audio_features['energy'], audio_features['tempo'], audio_features['key'], audio_features['loudness'], audio_features['mode'], audio_features['speechiness'], audio_features['acousticness'], audio_features['instrumentalness'], audio_features['liveness'], audio_features['valence']],
+            'hash': track_hash
         }
 
 def get_track_info(track_id):

@@ -8,14 +8,15 @@ class MusicData:
         
     def update_data(self):
         data = db.get_tracks()
-        self.track_dict = {}
-        self.data = []
-        self.track_data = []
-        for i, track in enumerate(data):
-            self.track_dict[track['track_id']] = i
-            self.track_data.append({'id':track['track_id'], 'name':track['track_name']})
-            self.data.append(track['tags'])
-        self.train_model()
+        if len(data) > 0:
+            self.track_dict = {}
+            self.data = []
+            self.track_data = []
+            for i, track in enumerate(data):
+                self.track_dict[track['track_id']] = i
+                self.track_data.append({'id':track['track_id'], 'name':track['track_name']})
+                self.data.append(track['tags'])
+            self.train_model()
     
     def get_data(self):
         return self.data
