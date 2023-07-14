@@ -57,7 +57,8 @@ def track_data_beautify(track, audio_features):
             'liveness': audio_features['liveness'],
             'valence': audio_features['valence'],
             'tags': [audio_features['danceability'], audio_features['energy'], audio_features['tempo'], audio_features['key'], audio_features['loudness'], audio_features['mode'], audio_features['speechiness'], audio_features['acousticness'], audio_features['instrumentalness'], audio_features['liveness'], audio_features['valence']],
-            'hash': track_hash
+            'hash': track_hash,
+            'image_url':track['album']['images'][0]['url']
         }
 
 def get_track_info(track_id):

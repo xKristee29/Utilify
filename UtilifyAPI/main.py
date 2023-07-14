@@ -48,6 +48,7 @@ async def add_track(track_id: str):
         print(e)
         return {"message": "Track not found"}
     db.insert_track(track)
+    track = db.get_track_by_hash(track['hash'])
     music_data.update_data()
     return track
 
@@ -58,3 +59,8 @@ async def get_track(track_id: str):
     except Exception as e:
         track = await add_track(track_id)
     return track
+
+@app.get('/get_tracks_by_criteria/')
+async def get_tracks_by_criteria(danceability: int = 20, energy: int = 40, tempo_min: int = 30, tempo_max: int = 300, limit: int = 10):
+    tracks = db.get_tracks_by_criteria(danceability, energy, tempo_min, tempo_max)[:limit]
+    return tracks
