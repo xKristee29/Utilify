@@ -56,10 +56,15 @@ def Search(page: ft.Page):
     tab = ft.ResponsiveRow([
         song_info,
         ft.Column([
-            ft.ResponsiveRow([
-                ft.Container(search_field, col=11),
-                ft.Container(search_button, col=1)
-            ],vertical_alignment=ft.CrossAxisAlignment.CENTER),
+            ft.Card(
+                ft.Container(
+                    ft.ResponsiveRow([
+                        ft.Container(search_field, col=11),
+                        ft.Container(search_button, col=1)
+                    ],vertical_alignment=ft.CrossAxisAlignment.CENTER),
+                    padding=10
+                )
+            ),
             search_results
         ],col={'lg':8})
     ],alignment=ft.MainAxisAlignment.CENTER)

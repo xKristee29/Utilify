@@ -19,7 +19,7 @@ def main(page: ft.Page):
         router.body
     )
 
-    page.go('/')
+    page.go('/recomandare')
 
     page.update()
 

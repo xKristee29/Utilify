@@ -1,12 +1,16 @@
 import flet as ft
 
 from views.search import Search
+from views.recommend import Recommend
+from views.playlist import Playlist
 
 class Router:
     def __init__(self, page: ft.Page):
         self.page = page
         self.routes = {
-            '/': Search
+            '/recomandare': Recommend,
+            '/cautare': Search,
+            '/playlist': Playlist
         }
         self.body = ft.Container(expand=True, padding=10)
 

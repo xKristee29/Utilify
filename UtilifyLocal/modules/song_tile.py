@@ -9,6 +9,17 @@ class SongTile(ft.UserControl):
         self.color = radom_color
         self.recommend = recommend
     
+    def with_recommend(self):
+        if self.recommend != None:
+            return ft.Container(
+                        ft.Column([
+                                ft.ElevatedButton(text='Recomandă', width=130, height=70, on_click=lambda e: self.recommend(self.track['track_id'])),
+                            ],
+                            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                            alignment=ft.MainAxisAlignment.CENTER,
+                        ),
+                    )
+    
     def build(self):
         song_tile = ft.Container(
             ft.Row([
@@ -28,14 +39,7 @@ class SongTile(ft.UserControl):
                         padding=10,
                         expand=True,
                     ),
-                    ft.Container(
-                        ft.Column([
-                                ft.ElevatedButton(text='Recomandă', width=130, height=70, on_click=lambda e: self.recommend(self.track['track_id'])),
-                            ],
-                            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                            alignment=ft.MainAxisAlignment.CENTER,
-                        ),
-                    )
+                    self.with_recommend()
                 ],
             ),
             bgcolor=self.color(),
