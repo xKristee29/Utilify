@@ -1,6 +1,7 @@
 import database as db
 from sklearn.metrics.pairwise import cosine_similarity
 import random
+from threading import Thread
 
 class MusicData:
     def __init__(self):
@@ -13,19 +14,21 @@ class MusicData:
             self.data = []
             self.track_data = []
             for i, track in enumerate(data):
-                self.track_dict[track['track_id']] = i
-                self.track_data.append({'id':track['track_id'], 'name':track['track_name']})
+                self.track_dict[track['hash']] = i
+                self.track_data.append({'id':track['track_id'], 'name':track['track_name'], 'hash':track['hash']})
                 self.data.append(track['tags'])
-            self.train_model()
+            self.train_thread = Thread(target=self.train_model)
+            self.train_thread.start()
     
     def get_data(self):
         return self.data
     
     def train_model(self):
-        self.cosine_sim = cosine_similarity(self.data)
+        results = cosine_similarity(self.data)
+        self.cosine_sim = results
 
-    def recommend_by_track(self, track_id, limit):
-        track_index = self.track_dict[track_id]
+    def recommend_by_track(self, track_hash, limit):
+        track_index = self.track_dict[track_hash]
         similar_tracks = list(enumerate(self.cosine_sim[track_index]))
         sorted_similar_tracks = sorted(similar_tracks, key=lambda x:x[1], reverse=True)[1:]
         recommended_tracks = []
@@ -36,4 +39,4 @@ class MusicData:
     
     def recommend_random(self, limit):
         track = random.choice(self.track_data)
-        return [track] + self.recommend_by_track(track['id'], limit)
+        return [track] + self.recommend_by_track(track['hash'], limit)

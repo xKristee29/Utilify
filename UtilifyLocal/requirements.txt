@@ -1,4 +1,3 @@
 spotdl
 spotipy
 flet
-colorutils

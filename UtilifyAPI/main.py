@@ -11,6 +11,14 @@ async def root():
     return {"message": "Hello World"}
 
 
+@app.get('/find_track/{track_name}')
+async def find_track(track_name: str):
+    result = spotify.find_track(track_name)
+    for track in result:
+        db.insert_track(track)
+    music_data.update_data()
+    return result
+
 @app.get('/recommend_by_track/{track_id}')
 async def recommend_by_track(track_id: str, limit: int = 10):
     try:
@@ -18,9 +26,11 @@ async def recommend_by_track(track_id: str, limit: int = 10):
     except Exception as e:
         track = await add_track(track_id)
     if track != {"message": "Track not found"}:
-        result = music_data.recommend_by_track(track_id, limit)
+        result = music_data.recommend_by_track(track['hash'], limit)
     else:
         return {"message": "Track not found"}
+    if result == None:
+        result = await recommend_random(limit)
     return result
 
 @app.get('/recommend_random/')
