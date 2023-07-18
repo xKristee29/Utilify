@@ -2,7 +2,7 @@ import flet as ft
 from colors import radom_color
 
 class SongTile(ft.UserControl):
-    def __init__(self, track, toggle_song_info, recommend):
+    def __init__(self, track, toggle_song_info, recommend = None):
         super().__init__()
         self.track = track
         self.toggle_song_info = toggle_song_info
@@ -19,6 +19,7 @@ class SongTile(ft.UserControl):
                             alignment=ft.MainAxisAlignment.CENTER,
                         ),
                     )
+        return ft.Container()
     
     def build(self):
         song_tile = ft.Container(

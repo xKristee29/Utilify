@@ -5,6 +5,7 @@ from modules.nav_bar import NavBar
 from views.router import Router
 
 import stores
+import notifier
 
 def main(page: ft.Page):
 
@@ -13,6 +14,11 @@ def main(page: ft.Page):
     page.appbar = AppBar(page)
     router = Router(page)
     page.navigation_bar = NavBar(page)
+
+    notifier.init(page)
+
+    page.file_picker = ft.FilePicker()
+    page.overlay.append(page.file_picker)
 
     page.on_route_change = router.on_route_change
     page.add(
@@ -24,4 +30,4 @@ def main(page: ft.Page):
     page.update()
 
 
-ft.app(target=main, assets_dir="assets")
+ft.app(target=main, name='Utilify', assets_dir="assets", view="flet_app")

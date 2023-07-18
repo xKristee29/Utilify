@@ -1,6 +1,7 @@
 import flet as ft
 from colors import radom_color
 import stores
+import downloader as dl
 
 def SongInfo(close, track):
     song_info = ft.Column([
@@ -34,7 +35,7 @@ def SongInfo(close, track):
                 bgcolor=radom_color(),
             ),
             ft.ResponsiveRow([
-                ft.FilledButton(text='Descarcă', height=50, icon='download', col=6),
+                ft.FilledButton(text='Descarcă', height=50, icon='download', col=6, on_click=lambda e: dl.spotify_download(track['track_id'])),
                 ft.FilledButton(text='Adaugă în playlist', height=50, icon='queue_music', col=6, on_click=lambda e: stores.add_track(track)),
             ]),
             ft.TextButton(
@@ -49,7 +50,7 @@ def SongInfo(close, track):
     )
     return song_info
 
-def SongInfo2(close, track):
+def SongInfo2(close, track, remove_track):
     song_info = ft.Column([
             ft.Container(
                 ft.Column([
@@ -81,8 +82,8 @@ def SongInfo2(close, track):
                 bgcolor=radom_color(),
             ),
             ft.ResponsiveRow([
-                ft.FilledButton(text='Descarcă', height=50, icon='download', col=6),
-                ft.FilledButton(text='Șterge din playlist', height=50, icon='delete_forever', col=6, on_click=lambda e: stores.remove_track(track)),
+                ft.FilledButton(text='Descarcă', height=50, icon='download', col=6, on_click=lambda e: dl.spotify_download(track['track_id'])),
+                ft.FilledButton(text='Șterge din playlist', height=50, icon='delete_forever', col=6, on_click=lambda e: remove_track(track)),
             ]),
             ft.TextButton(
                 text='Închide',
