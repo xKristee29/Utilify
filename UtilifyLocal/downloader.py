@@ -1,6 +1,7 @@
 import os
 from concurrent.futures import ThreadPoolExecutor
 import notifier
+import stores
 
 pool = ThreadPoolExecutor(max_workers=5)
 future = None
@@ -14,10 +15,16 @@ def spotify_download(data, started = lambda: notifier.notify('Download started')
 
 def download_track(track_id, started, finished):
     started()
-    os.system(f"cd downloads && spotdl https://open.spotify.com/track/{track_id} --overwrite skip --audio slider-kz piped youtube-music soundcloud --format mp3 --restrict ascii --simple-tui --log-level NOTSET")
-    finished()
+    try:
+        os.system(f"cd {stores.settings['download_path']} && spotdl https://open.spotify.com/track/{track_id} --overwrite skip --audio youtube-music soundcloud slider-kz piped --format mp3 --restrict ascii --simple-tui --log-level NOTSET")
+        finished()
+    except Exception as e:
+        notifier.notify('Nu s-a putut descărca: ' + str(e))
 
 def download_url(url, started, finished):
     started()
-    os.system(f"cd downloads && spotdl {url} --overwrite skip --audio slider-kz piped youtube-music soundcloud --threads 10 --format mp3 --restrict ascii --simple-tui --log-level NOTSET")
-    finished()
+    try:
+        os.system(f"cd {stores.settings['download_path']} && spotdl {url} --overwrite skip --audio youtube-music soundcloud slider-kz piped --threads 20 --format mp3 --restrict ascii --simple-tui --log-level NOTSET")
+        finished()
+    except Exception as e:
+        notifier.notify('Nu s-a putut descărca: ' + str(e))

@@ -6,6 +6,8 @@ import downloader as dl
 import os
 import sys
 from concurrent.futures import ThreadPoolExecutor
+import stores
+import notifier
 
 pool = ThreadPoolExecutor(max_workers=5)
 
@@ -13,20 +15,23 @@ def Downloads(page: ft.Page):
     global pool
 
     def search():
-        download_path = sys.path[0] + "\\downloads"
+        download_path = stores.settings['download_path']
 
-        list_of_files = filter(lambda x: os.path.isfile(os.path.join(download_path, x)),
-                            os.listdir(download_path))
-        list_of_files = sorted(list_of_files,
-                            key=lambda x: os.path.getmtime(
-                                os.path.join(download_path, x)),
-                            reverse=True)
-        
-        list_of_files = [track.replace(".mp3","") for track in list_of_files if track.endswith(".mp3")][:100]
+        try:
+            list_of_files = filter(lambda x: os.path.isfile(os.path.join(download_path, x)),
+                                os.listdir(download_path))
+            list_of_files = sorted(list_of_files,
+                                key=lambda x: os.path.getmtime(
+                                    os.path.join(download_path, x)),
+                                reverse=True)
+            
+            list_of_files = [track.replace(".mp3","") for track in list_of_files if track.endswith(".mp3")]
 
-        for track in list_of_files:
-            search_results.controls.append(SongTile(track=up.find_track(track)[0],toggle_song_info=toggle_song_info))
-            search_results.update()
+            for track in list_of_files:
+                search_results.controls.append(SongTile(track=up.find_track(track)[0],toggle_song_info=toggle_song_info))
+                search_results.update()
+        except Exception as e:
+            notifier.notify('Nu s-a putut încărca lista de melodii descărcate: ' + str(e))
 
     def download(e):
         playlist_id = url_field.value.split('playlist/')[-1].split('?')[0]

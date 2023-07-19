@@ -1,3 +1,5 @@
 spotdl
-spotipy
 flet
+requests
+hashlib
+json

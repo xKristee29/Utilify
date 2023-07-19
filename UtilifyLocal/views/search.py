@@ -20,6 +20,7 @@ def Search(page: ft.Page):
         search_results.controls = []
         for item in up.recommend_by_track(track_id):
             search_results.controls.append(SongTile(track=up.get_track(item['id']),toggle_song_info=toggle_song_info,recommend=recommend))
+            search_results.update()
         search_results.update()
         page.update()
     

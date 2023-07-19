@@ -2,9 +2,17 @@ from fastapi import FastAPI
 from music_data import MusicData
 import spotify_api as spotify
 import database as db
+from concurrent.futures import ThreadPoolExecutor
+
+pool = ThreadPoolExecutor(max_workers=100)
 
 app = FastAPI()
 music_data = MusicData()
+
+def insert_result(result):
+    for track in result:
+        db.insert_track(track)
+    music_data.update_data()
 
 @app.get("/")
 async def root():
@@ -13,10 +21,8 @@ async def root():
 
 @app.get('/find_track/{track_name}')
 async def find_track(track_name: str):
-    result = spotify.find_track(track_name)
-    for track in result:
-        db.insert_track(track)
-    music_data.update_data()
+    result = spotify.find_track(track_name)[:10]
+    pool.submit(insert_result, result)
     return result
 
 @app.get('/recommend_by_track/{track_id}')
@@ -45,9 +51,7 @@ async def add_playlist(playlist_id: str):
     except Exception as e:
         print(e)
         return {"message": "Playlist not found"}
-    for track in tracks:
-        db.insert_track(track)
-    music_data.update_data()
+    pool.submit(insert_result, tracks)
     return tracks
 
 @app.get('/add_track/{track_id}')

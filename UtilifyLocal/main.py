@@ -30,4 +30,4 @@ def main(page: ft.Page):
     page.update()
 
 
-ft.app(target=main, name='Utilify', assets_dir="assets", view="flet_app")
+ft.app(target=main, assets_dir="assets", view="flet_app")
