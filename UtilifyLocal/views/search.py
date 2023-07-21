@@ -2,24 +2,32 @@ import flet as ft
 from modules.song_info import SongInfo
 from modules.song_tile import SongTile
 from api import utilipy as up
+import stores
+
+saved_tracks = []
 
 def Search(page: ft.Page):
 
     def search(e):
+        saved_tracks.clear()
         search_results.controls = [ft.ProgressBar(color=ft.colors.BLUE_600)]
         search_results.update()
         search_results.controls = []
         for track in up.find_track(search_field.value):
+            saved_tracks.append(track)
             search_results.controls.append(SongTile(track=track,toggle_song_info=toggle_song_info,recommend=recommend))
         search_results.update()
         page.update()
     
     def recommend(track_id):
+        saved_tracks.clear()
         search_results.controls = [ft.ProgressBar(color=ft.colors.BLUE_600)]
         search_results.update()
         search_results.controls = []
         for item in up.recommend_by_track(track_id):
-            search_results.controls.append(SongTile(track=up.get_track(item['id']),toggle_song_info=toggle_song_info,recommend=recommend))
+            track = up.get_track(item['id'])
+            saved_tracks.append(track)
+            search_results.controls.append(SongTile(track=track,toggle_song_info=toggle_song_info,recommend=recommend))
             search_results.update()
         search_results.update()
         page.update()
@@ -52,7 +60,10 @@ def Search(page: ft.Page):
         on_click=search
     )
 
-    search_results = ft.ListView(expand=True, padding=3)
+    search_results = ft.Column()
+
+    for track in saved_tracks:
+        search_results.controls.append(SongTile(track=track,toggle_song_info=toggle_song_info,recommend=recommend))
 
     tab = ft.ResponsiveRow([
         song_info,
@@ -66,7 +77,7 @@ def Search(page: ft.Page):
                     padding=10
                 )
             ),
-            search_results
-        ],col={'lg':8})
-    ],alignment=ft.MainAxisAlignment.CENTER)
+            ft.Column([search_results])
+        ],col={'lg':8},scroll='hidden')
+    ],alignment=ft.MainAxisAlignment.CENTER,vertical_alignment=ft.CrossAxisAlignment.START)
     return tab

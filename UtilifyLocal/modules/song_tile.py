@@ -13,7 +13,7 @@ class SongTile(ft.UserControl):
         if self.recommend != None:
             return ft.Container(
                         ft.Column([
-                                ft.ElevatedButton(text='Recomandă', width=130, height=70, on_click=lambda e: self.recommend(self.track['track_id'])),
+                                ft.ElevatedButton(icon ='lightbulb', text='Recomandă', width=130, height=70, on_click=lambda e: self.recommend(self.track['track_id'])),
                             ],
                             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                             alignment=ft.MainAxisAlignment.CENTER,
@@ -33,8 +33,8 @@ class SongTile(ft.UserControl):
                     ),
                     ft.Container(
                         ft.Column([
-                                ft.Text(self.track['track_name'], size=20, weight='w800'),
-                                ft.Text(', '.join(self.track['track_artists']), size=18, weight='w200')
+                                ft.Text(self.track['track_name'], size=17, weight='w800'),
+                                ft.Text(', '.join(self.track['track_artists']), size=13, weight='w200')
                             ],
                         ),
                         padding=10,
@@ -46,7 +46,7 @@ class SongTile(ft.UserControl):
             bgcolor=self.color(),
             border_radius=25,
             padding=10,
-            margin=10,
+            margin=5,
             on_click=lambda e: self.toggle_song_info(self.track),
         )
         return song_tile

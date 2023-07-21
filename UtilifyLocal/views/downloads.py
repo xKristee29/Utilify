@@ -11,6 +11,8 @@ import notifier
 
 pool = ThreadPoolExecutor(max_workers=5)
 
+saved_tracks = []
+
 def Downloads(page: ft.Page):
     global pool
 
@@ -28,8 +30,11 @@ def Downloads(page: ft.Page):
             list_of_files = [track.replace(".mp3","") for track in list_of_files if track.endswith(".mp3")]
 
             for track in list_of_files:
-                search_results.controls.append(SongTile(track=up.find_file(track)[0],toggle_song_info=toggle_song_info))
-                search_results.update()
+                song = up.find_file(track)[0]
+                if song not in saved_tracks:
+                    saved_tracks.append(song)
+                    search_results.controls.append(SongTile(track=song,toggle_song_info=toggle_song_info))
+                    search_results.update()
         except Exception as e:
             notifier.notify('Nu s-a putut încărca lista de melodii descărcate: ' + str(e))
 
@@ -70,7 +75,10 @@ def Downloads(page: ft.Page):
         on_click=download
     )
 
-    search_results = ft.ListView(expand=True, padding=3)
+    search_results = ft.Column()
+
+    for track in saved_tracks:
+        search_results.controls.append(SongTile(track=track,toggle_song_info=toggle_song_info))
 
     tab = ft.ResponsiveRow([
         song_info,
@@ -84,8 +92,8 @@ def Downloads(page: ft.Page):
                     padding=10
                 )
             ),
-            search_results
-        ],col={'lg':8})
-    ],alignment=ft.MainAxisAlignment.CENTER)
+            ft.Column([search_results])
+        ],col={'lg':8},scroll='hidden')
+    ],alignment=ft.MainAxisAlignment.CENTER,vertical_alignment=ft.CrossAxisAlignment.START)
     pool.submit(search)
     return tab

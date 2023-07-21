@@ -1,5 +1,3 @@
 spotdl
 flet
 requests
-hashlib
-json

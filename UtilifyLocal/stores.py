@@ -4,6 +4,7 @@ import os
 import notifier
 
 playlist = []
+search_result_delta = 520
 
 try:
     os.mkdir('./downloads')

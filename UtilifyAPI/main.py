@@ -35,7 +35,6 @@ async def recommend_by_track(track_id: str, limit: int = 10):
         track = db.get_track(track_id)
     except Exception as e:
         track = await add_track(track_id)
-    print(track)
     if track != {"message": "Track not found"}:
         result = music_data.recommend_by_track(track['hash'], limit)
     else:
