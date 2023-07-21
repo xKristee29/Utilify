@@ -53,7 +53,7 @@ def Playlist(page: ft.Page):
         on_click=lambda e: page.file_picker.pick_files(
             allow_multiple=True,
             allowed_extensions=['ufy'],
-            initial_directory=sys.path[0] + '\\playlists\\'
+            initial_directory=stores.settings['playlist_path']
         )
     )
 

@@ -28,7 +28,7 @@ def Downloads(page: ft.Page):
             list_of_files = [track.replace(".mp3","") for track in list_of_files if track.endswith(".mp3")]
 
             for track in list_of_files:
-                search_results.controls.append(SongTile(track=up.find_track(track)[0],toggle_song_info=toggle_song_info))
+                search_results.controls.append(SongTile(track=up.find_file(track)[0],toggle_song_info=toggle_song_info))
                 search_results.update()
         except Exception as e:
             notifier.notify('Nu s-a putut încărca lista de melodii descărcate: ' + str(e))
@@ -87,6 +87,5 @@ def Downloads(page: ft.Page):
             search_results
         ],col={'lg':8})
     ],alignment=ft.MainAxisAlignment.CENTER)
-
     pool.submit(search)
     return tab

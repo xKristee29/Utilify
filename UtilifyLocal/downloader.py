@@ -16,7 +16,7 @@ def spotify_download(data, started = lambda: notifier.notify('Download started')
 def download_track(track_id, started, finished):
     started()
     try:
-        os.system(f"cd {stores.settings['download_path']} && spotdl https://open.spotify.com/track/{track_id} --overwrite skip --audio youtube-music soundcloud slider-kz piped --format mp3 --restrict ascii --simple-tui --log-level NOTSET")
+        os.system(f"cd {stores.settings['download_path']} && spotdl https://open.spotify.com/track/{track_id} --overwrite skip --audio youtube-music soundcloud slider-kz piped --format mp3 --restrict ascii")
         finished()
     except Exception as e:
         notifier.notify('Nu s-a putut descărca: ' + str(e))
@@ -24,7 +24,7 @@ def download_track(track_id, started, finished):
 def download_url(url, started, finished):
     started()
     try:
-        os.system(f"cd {stores.settings['download_path']} && spotdl {url} --overwrite skip --audio youtube-music soundcloud slider-kz piped --threads 20 --format mp3 --restrict ascii --simple-tui --log-level NOTSET")
+        os.system(f"cd {stores.settings['download_path']} && spotdl {url} --overwrite skip --audio youtube-music soundcloud slider-kz piped --threads 20 --format mp3 --restrict ascii")
         finished()
     except Exception as e:
         notifier.notify('Nu s-a putut descărca: ' + str(e))

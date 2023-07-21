@@ -5,3 +5,7 @@ __pycache__/
 downloads/
 
 *.json
+*.spec
+
+build/
+dist/

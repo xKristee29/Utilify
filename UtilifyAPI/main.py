@@ -18,11 +18,15 @@ def insert_result(result):
 async def root():
     return {"message": "Hello World"}
 
-
 @app.get('/find_track/{track_name}')
-async def find_track(track_name: str):
-    result = spotify.find_track(track_name)[:10]
-    pool.submit(insert_result, result)
+async def find_track(track_name: str, limit: int = 10):
+    result = spotify.find_track(track_name)[:limit]
+    insert_result(result)
+    return result
+
+@app.get('/find_file/{file_name}')
+async def find_file(file_name: str, limit: int = 10):
+    result = spotify.find_track(file_name)[:limit]
     return result
 
 @app.get('/recommend_by_track/{track_id}')
@@ -31,12 +35,11 @@ async def recommend_by_track(track_id: str, limit: int = 10):
         track = db.get_track(track_id)
     except Exception as e:
         track = await add_track(track_id)
+    print(track)
     if track != {"message": "Track not found"}:
         result = music_data.recommend_by_track(track['hash'], limit)
     else:
         return {"message": "Track not found"}
-    if result == None:
-        result = await recommend_random(limit)
     return result
 
 @app.get('/recommend_random/')
@@ -51,7 +54,7 @@ async def add_playlist(playlist_id: str):
     except Exception as e:
         print(e)
         return {"message": "Playlist not found"}
-    pool.submit(insert_result, tracks)
+    insert_result(tracks)
     return tracks
 
 @app.get('/add_track/{track_id}')

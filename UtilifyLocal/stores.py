@@ -1,22 +1,29 @@
 import json
 import sys
+import os
 import notifier
 
 playlist = []
 
-f = open('settings.ufy','r')
+try:
+    os.mkdir('./downloads')
+except FileExistsError:
+    pass
+
+try:
+    os.mkdir('./playlists')
+except FileExistsError:
+    pass
+
+try:
+    f = open('settings.ufy','r')
+except FileNotFoundError:
+    f = open('settings.ufy','w')
+    f.write('{"playlist_path":"./playlists","download_path":"./downloads"}')
+    f.close()
+    f = open('settings.ufy','r')
 
 settings = json.load(f)
-
-if settings['playlist_path'] == '':
-    settings['playlist_path'] = sys.path[0].replace("\\","/") + '/playlists'
-
-if settings['download_path'] == '':
-    settings['download_path'] = sys.path[0] + '\\downloads'
-
-f = open('settings.ufy','w')
-json.dump(settings, f)
-f.close()
 
 def save_settings(download_path, playlist_path):
     change_download_path(download_path)
@@ -32,8 +39,8 @@ def change_playlist_path(path):
 
 def change_download_path(path):
     f = open('settings.ufy','w')
-    settings['download_path'] = path.replace("/","\\")
-    if settings['download_path'][-1] == '\\':
+    settings['download_path'] = path.replace("\\","/")
+    if settings['download_path'][-1] == '/':
         settings['download_path'] = settings['download_path'][:-1]
     json.dump(settings, f)
     f.close()

@@ -17,9 +17,6 @@ def main(page: ft.Page):
 
     notifier.init(page)
 
-    page.file_picker = ft.FilePicker()
-    page.overlay.append(page.file_picker)
-
     page.on_route_change = router.on_route_change
     page.add(
         router.body
