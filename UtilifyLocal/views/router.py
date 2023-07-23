@@ -5,6 +5,7 @@ from views.recommend import Recommend
 from views.playlist import Playlist
 from views.downloads import Downloads
 from views.settings import Settings
+from views.help import Help
 
 class Router:
     def __init__(self, page: ft.Page):
@@ -14,7 +15,8 @@ class Router:
             '/cautare': Search,
             '/playlist': Playlist,
             '/descarcare': Downloads,
-            '/setari': Settings
+            '/setari': Settings,
+            '/ajutor': Help
         }
         self.body = ft.Container(expand=True, padding=10)
 

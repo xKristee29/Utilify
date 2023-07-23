@@ -3,6 +3,7 @@ import flet as ft
 from views.search import Search
 from views.recommend import Recommend
 from views.playlist import Playlist
+from views.help import Help
 
 class Router:
     def __init__(self, page: ft.Page):
@@ -11,6 +12,7 @@ class Router:
             '/recomandare': Recommend,
             '/cautare': Search,
             '/playlist': Playlist,
+            '/ajutor': Help
         }
         self.body = ft.Container(expand=True, padding=10)
 
