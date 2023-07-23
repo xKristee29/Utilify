@@ -11,6 +11,8 @@ def main(page: ft.Page):
 
     page.title = "Utilify"
 
+    page.theme_mode = "dark"
+
     page.appbar = AppBar(page)
     router = Router(page)
     page.navigation_bar = NavBar(page)

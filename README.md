@@ -1,61 +1,64 @@
 # Utilify
-*creat de Soiu Cristian-Ionuț*
+*creat de Soiu Cristian-Ionuț - clasa a 10-a, Colegiul Național "Gh. M. Murgoci" Brăila*
 
-### Problema
+*prof. îndrumător Marin Florina*
 
-În timpul evenimentelor cu public numeros, a spectacolelor sau a petrecerilor, în general este folosită muzica pentru un efect de bunăstare.
-În general o persoană este desemnată ca animator muzical, inginer de sunet, sau, mai general, DJ. Acesta are mereu responsabilitatea de a se adapta la gusturile muzicale ale publicului, oferind astfel o experiență plăcută.
-Unul dintre cele mai mari impasuri este selecția melodiilor, în general greoaie. Un DJ în medie are în biblioteca sa aproximativ **500 de piese**.
-Pe parcursul unei sesiuni acesta este constrâns la maxim **2 minute** de a alege și a mixa următoarea melodie.
+## **Problema**
 
-### Soluția
+În cadrul evenimentelor sau a emisiunilor în care este necesară alegerea spontană de melodii, se întâmplă uneori ca persoana care se ocupă de acest lucru, cum ar fi un DJ, un realizator de radio sau un inginer de sunet, să nu aibă la îndemână o listă de melodii din care să aleagă sau să aibă o listă mult prea mare, din care **să nu poată alege foarte rapid**. În aceste cazuri, este nevoie de o aplicație care să permită **alegerea rapidă** a unei melodii, care să fie ușor de utilizat și care să nu necesite mult timp pentru a fi învățată.
 
-Utilify **automatizează** procesul de alegere a pieselor, astfel mărind timpul alocat mixării. Pe lângă oferă și avantajul faptului că dacă o melodie nu se află până în acel moment în biblioteca utilizatorului, acesta o **poate descărca** direct din aplicație, ne mai fiind nevoie pornirea celei de-a doua aplicații.
+Un DJ are în medie în biblioteca sa undeva la **500 de piese**, iar timpul în care trebuie să aleagă o melodie nouă pe care să o și mixeze este de numai **2 minute**.
 
-### Publicul țintă
+## **Soluția**
 
-Ca utilizatori primari soft-ul este dedicat pentru:
-- DJ
-- Animatori muzicali
-- Ingineri de sunet
-- Alte persoane ce au responsabilitatea de a selecta muzică
+Utilify **automatizează** procesul de alegere a unei melodii, **reducând timpul** necesar pentru alegerea unei melodii noi, **înlocuind** lista de melodii cu o **interfață grafică** care permite **alegerea rapidă** a unei melodii.
 
-În planul secund al utilizatorilor avem:
-- Studiourile de radio și televiziune
-- Utilizatorii de zi cu zi
+Utilizatorul beneficiază de filtrare bazată pe **energie**, **dansabilitate** și **tempo**, căutare pe bază de **nume sau artist**, cât și de **recomandarea** de melodii bazată pe similaritate cu un **sistem inteligent**.
 
-***Opinia și utilitatea personală:***
+Pe lângă, poate **descărca** melodiile dorite direct din aplicație, obținând și informații despre piese. De asemenea, poate **salva** un playlist pentru a fi folosit mai târziu.
+
+## **Publicul țintă**
+
+Publicul țintă este format din: 
+- **DJ**
+- **realizatori de radio**
+- **ingineri de sunet**
+
+Aplicația poate fi folosită în cadrul emisiilor radio sau de televiziune, în cadrul evenimentelor, precum petreceri, nunți, botezuri, etc., sau în cadrul unui studio de înregistrări.
+
+### ***Opinia și utilitatea personală:***
+
 Ca DJ în timpul evenimentelor întâmpin mereu problema alesului următoarei melodii. Mă pierd mereu în aproape 500 de melodii din care am de ales una singură. Așa că m-am gândit cum pot să-mi ușurez munca într-un mod inteligent și am venit cu această soluție care, din testele pe care le-am făcut pe propria persoană, reușește să mă uimească.
 Prin utilizarea aplicației îmi acord mai mult timp mixării melodiilor, putând oferi o experiență îmbunătățită publicului meu.
 
-## Arhitectura
+## **Arhitectura aplicației**
 
-Funcționalitățile aplicației:
-- Căutarea și recomandarea de melodii bazată pe analiza pieselor (tempo, nivelul de energie, dansabilitate, gen muzical, popularitate)
-- Descărcarea pieselor dorite
-- Generarea de playlist-uri personalizate în funcție de istoricul fiecărui utilizator (în lucru)
-- Recomandarea de melodii automatizată cu ajutorul AI (inteligenței artificiale)
+### ***Funcționalitățile aplicației:***
 
-### Limbajele de programare și mediile de dezvoltare
+- **Căutare** - permite căutarea unei melodii după nume sau artist
+- **Filtrare** - permite filtrarea melodiilor după energie, dansabilitate și tempo
+- **Recomandare** - recomandă melodii similare cu o melodie dată
+- **Descărcare** - permite descărcarea unei melodii
+- **Salvare** - permite salvarea și încărcarea unui playlist
+- **Informații** - oferă informații despre o melodie
 
-Ca limbaj de programare principal am utilizat **Python**. Pentru interfața grafică am optat pentru **NiceGUI**, putem include și **HTML** și **TailwindCSS** în construirea aplicației.
+### ***Unelte folosite***
 
-Pentru construirea și antrenarea inteligenței artificiale am utilizat **Google Colab**, fișierul fiind prezent în proiect, denumit `UtilifyAI.ipynb`, iar modelul rezultat fiind `utilify-ai.h5`.
+- **Python** - limbajul de programare folosit
+- **Flet** - framework-ul folosit pentru crearea interfeței grafice
+- **Spotipy** - biblioteca folosită pentru a interacționa cu API-ul Spotify
+- **SpotDL** - biblioteca folosită pentru a descărca melodii de pe Spotify
+- **SciKit-Learn** - biblioteca folosită pentru a crea modelul de recomandare
+- **Threading** - biblioteca folosită pentru a crea thread-uri pentru descărcarea melodiilor
+- **FastAPI** - framework-ul folosit pentru a crea API-ul
+- **Supabase** - baza de date folosită pentru a stoca melodiile
 
-Bibliotecile utilizate în acest proiect sunt:
-- NiceGUI (interfață)
-- Spotipy (Spotify API)
-- SpotDL (descărcarea melodiilor cu ajutorul YouTube API)
-- NumPy (AI)
-- SciKit-Learn (AI)
-- Pandas (AI)
-- TensorFlow (AI)
-- GSpread (bază de date)
-- Threading (eficiență în execuție)
+***Justificarea folosirii Python***
 
-***Justificarea folosirii Python și a NiceGUI***
+Python este un limbaj de programare foarte popular, care oferă o multitudine de biblioteci și framework-uri pentru a crea aplicații. Este un limbaj de programare foarte ușor de învățat, care permite crearea de aplicații complexe într-un timp foarte scurt. De asemenea, este un limbaj de programare foarte versatil, care poate fi folosit pentru a crea aplicații de orice tip, de la aplicații web, la aplicații de desktop sau aplicații mobile.
 
-Unul dintre cele mai importante avantaje ale **Python-ului** este că bibliotecile pot funcționa și ca obiecte deci este mult mai ușor de accesat și modificat date.
+Unul dintre cele mai importante avantaje ale Python-ului este că bibliotecile pot funcționa și ca obiecte deci
+este mult mai ușor de accesat și modificat date.
 
 Exemplu:
 
@@ -66,14 +69,12 @@ valoare = 1
 
 # Fișierul b.py
 import a
-
 a.valoare = 3
 ###############
 
 # Fișierul main.py
 import a
 import b
-
 print(a.valoare) # Afișează 3
 ###############
 
@@ -81,76 +82,172 @@ print(a.valoare) # Afișează 3
 $ python main.py
 ```
 
-Framework-ul **NiceGUI** este utilizat pentru **simplitatea** acestuia, oferind în același timp și **modularitatea din ReactJS**, astfel codul necesar unei pagini este **extrem de redus**. Acesta utilizează componentele clasice din **HTML** la care adaugă mici template-uri pentru eficientizarea stilizării. Utilizând **TailwindCSS** putem stiliza pagina in-line fără a fi nevoie de adăugarea fișierelor **CSS**.
+***Justificarea folosirii Flet***
 
-Exemplu:
+Flet este un framework pentru crearea de interfețe grafice în Python. Este un framework foarte ușor de folosit, care permite crearea de interfețe grafice într-un timp foarte scurt. De asemenea, este un framework foarte versatil, care permite crearea de interfețe grafice de orice tip.
+
+Punctul forte al framework-ului este **reducerea drastică** a codului scris pentru a crea interfețe grafice, cât și asemănarea cu framework-ul **Flutter**.
+
+Spre exemplu așa adaugi 3 butoane într-o pagină:
+
 ```py
-# Subprogram ce adaugă în listă o piesă 
-# împreună cu butoanele de descărcare, like și dislike.
-def add_track(track):
-    global result_container
-    global track_elems
-    with result_container:
-        with ui.row().classes('flex justify-center items-center') as track_row:
-            ui.html(f'<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/{track}?utm_source=generator" height="80" width="500" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>')
-            track_elems[track_row]=track
-            with ui.row().classes('flex justify-center items-center'):
-                ui.button('',on_click=lambda:download_row(track_row))
-                    .props('flat color=primary icon=file_download')
-                ui.button('',on_click=lambda:like(track_row))
-                    .props('flat color=primary icon=thumb_up')
-                ui.button('',on_click=lambda:dislike(track_row))
-                    .props('flat color=primary icon=thumb_down')
+import flet as ft
+
+def main(page: ft.Page):
+    page.title = "Basic filled buttons"
+    page.add(
+        ft.FilledButton(text="Filled button"),
+        ft.FilledButton("Disabled button", disabled=True),
+        ft.FilledButton("Button with icon", icon="add"),
+    )
+
+ft.app(target=main)
 ```
 
-## Elementele distinctive ale aplicației în comparație cu competiția
+***Justificarea folosirii Spotipy***
 
-Aplicațiile cu care concurează acest soft sunt:
-- MiniTool uTube Downloader
-- YouTube Music
-- Spotify
+Spotipy este o bibliotecă pentru Python care permite interacționarea cu API-ul Spotify. Este o bibliotecă foarte ușor de folosit, iar API-ul Spotify este foarte bine documentat, ceea ce face foarte ușoară interacționarea cu acesta.
 
-### Cu ce este diferit?
+***Justificarea folosirii SpotDL***
 
-În primul rând utilizatorul scapă de toate reclamele cu care te întâlnești la celelalte aplicații.
-Pe lângă, lățimea de bandă utilizată este mult mai mică, deoarece nu se descarcă un videoclip întreg și apoi se transformă în audio (cazul MiniTool uTube Downloader și YouTube Music), ci pentru preview se selectează 30 de secunde din melodie.
-O îmbunătățire a descoperirii de muzică ar fi faptul că poți căuta explicit după anumite valori de tempo, nivel de energie, dansabilitate și popularitate, specificând genul, poate chiar și artistul sau alte cuvinte cheie. Prin acest mod se restrânge aria pieselor la doar câteva din care poți alege cu ușurință.
-Inteligența artificială automatizează procesul de căutare astfel devenind mult mai eficient procesul de selectare a unei piese muzicale.
+SpotDL este un tool CLI care permite descărcarea melodiilor de pe Spotify. Se execută foarte ușor prin biblioteca `os` din Python, iar melodiile se descarcă la o calitate destul de bună.
 
-## Ghid de instalare
+***Justificarea folosirii SciKit-Learn***
 
-1. Se dezarhivează proiectul
-2. Se instalează bibliotecile necesare rulării
+SciKit-Learn este o bibliotecă pentru Python care permite crearea de modele de machine learning. Am reușit să creez un mod de calculare a similarității între melodii destul de eficient folosind această bibliotecă.
 
+***Justificarea folosirii Threading***
+
+Threading este o bibliotecă pentru Python care permite crearea de thread-uri. Am folosit această bibliotecă pentru a crea thread-uri pentru descărcarea melodiilor, astfel încât aplicația să nu se blocheze în timpul descărcării. De asemenea, am folosit această bibliotecă pentru a crea thread-uri pentru calcularea similarității între melodii, astfel încât să evit timpul de așteptare.
+
+***Justificarea folosirii FastAPI***
+
+FastAPI este un framework pentru crearea de API-uri în Python. Este un framework foarte ușor de folosit, care permite crearea de API-uri într-un timp foarte scurt.
+
+***Justificarea folosirii Supabase***
+
+Supabase este o bază de date care permite stocarea datelor într-un mod eficient. Este o bază de date foarte ușor de folosit, care permite stocarea datelor într-un mod foarte rapid. Fiind o bază de date bazată pe PostgreSQL, permite stocarea datelor într-un mod foarte sigur și ajută mult la filtrarea melodiilor.
+
+## **Elementele distinctive ale aplicației în comparație cu competiția**
+
+Principalii competitori sunt:
+
+- **Spotify** - aplicația de streaming muzical cu cei mai mulți utilizatori
+- **YouTube Music** - aplicația de streaming muzical cu cea mai mare bază de date
+
+### ***Cu ce este diferit?***
+
+- **Tehnologia de recomandare** 
+  
+  Aplicația folosește un proces asemănător cu machine learning-ul calculând similaritatea între melodii bazat pe caracteristicile melodiei, după analiza acesteia, față de alți competitori care folosesc un proces bazat pe ascultările utilizatorilor și popularitatea melodiilor
+
+> **De ce este mai bun?:**
+> Cu ajutorul acestui proces utilizatorii pot descoperi melodii noi, care le-ar plăcea, dar pe care nu le-ar fi descoperit altfel.
+>
+> **Exemplul Spotify:**
+> Dacă încerci să asculți un playlist amestecat care are o diferență mare de popularitate între melodii, în primele 20 de piese vei asculta mare parte doar melodiile populare, iar cele mai puțin populare vor fi ascultate foarte rar. Astfel, utilizatorii nu vor descoperi melodii noi, care le-ar plăcea, dar care nu sunt populare.
+
+
+- **Filtrarea specializată** 
+  
+  Aplicația permite filtrarea melodiilor după caracteristici specifice, precum: energie, dansabilitate și tempo
+
+> **La ce ajută?:**
+> În general ca DJ ai nevoie să cauți melodii dintr-o anumită zonă definită de caracteristici, pentru că trecerea de la o melodie la alta să fie cât mai naturală.
+> Cu cât o tranziție este mai naturală, cu atât publicul va fi mai mulțumit.
+
+
+- **Descărcarea melodiilor** 
+  
+  Aplicația permite descărcarea melodiilor în format MP3, astfel încât să poți folosi melodiile în alte aplicații
+
+> **Diferența față de competitori:**
+> Prin faptul că piesele sunt descărcate în format MP3, utilizatorii pot folosi melodiile în alte aplicații, precum: Virtual DJ, Serato DJ, Rekordbox DJ, etc.
+> În cazul competitorilor nu se poate face acest lucru, deoarece melodiile sunt stocate într-un format proprietar, deci nu pot fi folosite mai departe.
+
+
+- **Savlarea playlist-urilor local** 
+  
+  Aplicația permite salvarea playlist-urilor local, astfel încât să poți folosi playlist-urile în alte aplicații, să le poți trimite prietenilor sau chiar să le utilizezi pe un alt calculator
+
+> **Avantaje:**
+> Datorită spațiului necesar pentru stocarea playlist-urilor fiind redus, fișierele pot fi trimise foarte ușor prin intemediul oricărei aplicații de comunicare, precum: WhatsApp, Messenger, Discord, etc.
+
+
+- **Interacțiunea cu publicul** 
+  
+  Aplicația web progresivă permite interacțiunea cu publicul prin intermediul unui playlist unde participanții la eveniment pot adăuga sugestii de melodii astfel, DJ-ul poate vedea ce melodii ar dori publicul să asculte
+
+> **Avantaje:**
+> DJ-ul se poate plia foarte ușor pe dorințele publicului, astfel încât să fie mulțumit de muzica ascultată.
+
+## **Ghidul de instalare**
+
+### ***UtilifyLocal - aplicația entertainer-ului***
+
+1. Descarcă arhiva pentru sistemul tău de operare de pe pagina de `Releases` a repository-ului de GitHub
+2. Dezarhivează folder-ul
+3. Deschide folder-ul și execută `Utilify.exe`
+4. Ai pornit aplicația
+
+### ***UtilifyPWA - aplicația publicului***
+  
+1. Accesează pagina de `Releases` a repository-ului de GitHub
+2. Descarcă arhiva `UtilifyPWA.zip`
+3. Dezarhivează folder-ul
+4. Se deschide folder-ul în terminal și se lansează comanda:
+```bash
+pip install -r requirements.txt
 ```
-$ pip install -r requirements.txt
+   
+- **Metoda fly.io**
+  
+4. Deschide folder-ul și editează fișierul `fly.toml` cu un nume la alegere
+5. Deschide folderul în terminal și lansează imaginea de Docker pe fly.io:
+```bash
+flyctl apps create --name <numele-aplicației-din-fișierul-editat>
+flyctl deploy
 ```
+6. După încărcare partajezi link-ul primit în terminal cu publicul
 
-3. Se execută aplicația
+- **Metoda localtunnel**
 
+4. Se instalează localtunnel folosind comanda:
+```bash
+npm install -g localtunnel
 ```
-$ python main.py
+5. Deschide folderul în terminal și lansează comanda:
+```bash
+flet main.py
 ```
+6. Se deschide din nou folderul în terminal și lansează comanda:
+```bash
+lt --port 8080
+```
+7. După încărcare partajezi link-ul primit în terminal cu publicul
 
-## Testimoniale
+## **Testimoniale**
 
-#### DJ Zamfir
-O aplicație foarte folositoare mai ales atunci când nu ai idee ce melodie să alegi din atât de multe. Dar o poți folosi și ca aplicație de ascultat muzică în mașină, spre exemplu.
+### ***Cristian - DJ Zamfir***
+> O aplicație foarte folositoare mai ales atunci când nu ai idee ce melodie să alegi din atât de multe.
 
-#### DJ Ino
-Programul este interesant, de abia aștept să văd cum generează playlist-uri, mi-ar ușura munca enorm. Doar vii la petrecere te pui la consolă și poți să te și distrezi, la cât te scapă de muncă.
+### ***Dan - DJ Ino***
+> Programul este interesant, de abia aștept să văd cum generează playlist-uri, mi-ar ușura munca enorm. Doar vii la petrecere te pui la consolă și poți să te și distrezi, la cât te scapă de muncă.
 
-## Imagini din timpul antrenamentului
+### ***YouDJ - Platformă educațională pentru DJ***
+> Apreciem mult inițiativele noi, iar această idee de aplicație ne-a surprins plăcut. Am testat programul și suntem nerăbdători să începem colaborarea, ar fi de mare ajutor API-ul. Chiar este folositor mai ales pentru începătorii care nu prea au idee ce să aleagă."
 
-![Acuratețe](images/accuracy.png)
+<div style="page-break-after: always;"></div>
 
-![NN](images/neural-net.png)
-*Imaginea rețelei neuronale*
+## **Imagini anexe**
 
-![Tempo](images/tempo.png)
+![Roadmap](https://i.imgur.com/XUdSknx.png)
 
-![Dansabilitate](images/danceability.png)
+***Aplicația publicului***
+![Mobile App](https://i.imgur.com/87gJqZd.png)
 
-![Nivel energie](images/energy.png)
+***Aplicația entertainer-ului***
+![Desktop App](https://i.imgur.com/oYMnVtO.png)
 
-![Popularitate](images/popularity.png)
+***Raport utilizare baza de date***
+![Rapoarte baza de date](https://i.imgur.com/4ZCZ09P.png)

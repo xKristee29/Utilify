@@ -13,7 +13,7 @@ class SongTile(ft.UserControl):
         if self.recommend != None:
             return ft.Container(
                         ft.Column([
-                                ft.ElevatedButton(icon ='lightbulb', text='Recomandă', width=130, height=70, on_click=lambda e: self.recommend(self.track['track_id'])),
+                                ft.ElevatedButton(icon ='lightbulb', text='Recomandă', width=150, height=70, on_click=lambda e: self.recommend(self.track['track_id'])),
                             ],
                             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                             alignment=ft.MainAxisAlignment.CENTER,
