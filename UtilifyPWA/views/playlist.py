@@ -19,7 +19,7 @@ def Playlist(page: ft.Page):
         page.update()
 
     def toggle_song_info(track):
-        song_info.controls = [SongInfo(track=track,close=close,update_list=update_list),ft.Container(height=2e9)]
+        song_info.controls = [SongInfo(track=track,close=close,update_list=update_list,page=page),ft.Container(height=2e9)]
         if not song_info.visible:
             song_info.visible = not song_info.visible
         song_info.update()

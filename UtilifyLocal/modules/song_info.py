@@ -3,7 +3,7 @@ from colors import radom_color
 import stores
 import downloader as dl
 
-def SongInfo(close, track, update_list = lambda: None):
+def SongInfo(close, track, page: ft.Page, update_list = lambda: None):
 
     def update(e):
         modify_playlist()
@@ -27,6 +27,9 @@ def SongInfo(close, track, update_list = lambda: None):
                 on_click=update
             )
         edit_playlist_button.update()
+    
+    def open_track_in_spotify(e):
+        page.launch_url('https://open.spotify.com/track/' + track['track_id'])
 
     edit_playlist_button = ft.Container(col=6)
 
@@ -77,7 +80,8 @@ def SongInfo(close, track, update_list = lambda: None):
             ),
             ft.ResponsiveRow([
                 ft.FilledButton(text='Descarcă', height=50, icon='download', col=6, on_click=lambda e: dl.spotify_download(track['track_id'])),
-                edit_playlist_button
+                edit_playlist_button,
+                ft.FilledButton(text='Deschide în Spotify', height=50, icon='open_in_new', on_click=open_track_in_spotify, col=12),
             ]),
             ft.TextButton(
                 text='Închide',

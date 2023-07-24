@@ -37,7 +37,7 @@ def Search(page: ft.Page):
         song_info.update()
 
     def toggle_song_info(track):
-        song_info.controls = [SongInfo(track=track,close=close),ft.Container(height=2e9)]
+        song_info.controls = [SongInfo(track=track,close=close,page=page),ft.Container(height=2e9)]
         if not song_info.visible:
             song_info.visible = not song_info.visible
         song_info.update()
